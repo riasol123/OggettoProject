@@ -1,0 +1,429 @@
+<!-- <!DOCTYPE html> -->
+<!-- Если убрать коммент с 1 сторчки, то у меня выбр ошибки открывается по середине, а не около курсора -->
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+    <div id="loadScreen">
+        <img src="images/Test/loading.gif" width="350vw" height="350vw">
+    </div>
+
+    <link rel="stylesheet" href="style/Test.css">
+    
+<!-- задний фон -->
+    <div>  
+        <img src="images/Test/back.png" class="left_down">
+        <img src="images/Test/right.png" class="right">
+    </div>
+
+    
+    <div  class="spisok_now">
+        <div id="errors_now" class="dropdown_content_spisok">
+            
+        </div>
+    </div>
+
+<!--  -->
+<!-- Тут фото со всем -->
+    <div class="kartinka" >
+        <!--  {размер был такой но нужен другой} вроде поставил -->
+    
+        
+        <img id="img" usemap="#tuk">
+        
+        <map id="map" name="tuk" onclick="coordinate(event)">  
+            <!-- надо заново выбрать зоны -->
+
+            <area shape="rect" class="area" coords="161,26,262,78" alt="Контентная">
+            <area shape="rect" class="area" coords="432,76,671,189" alt="Логическая">
+
+            <area shape="rect" class="area" coords="434,207,586,249" alt="Контентная">
+            <area shape="rect" class="area" coords="523,375,675,417" alt="В отрисовке интерфейса">
+
+            <area shape="rect" class="area" coords="426,425,557,467" alt="Типографическая">
+            <area shape="rect" class="area" coords="23,112,92,288" alt="Контентная">
+
+            <area shape="rect" id="mainArea" coords="1,1,683,486" alt="не то" >
+                
+        </map>
+    
+
+        <div id="underground_picture">
+            <button id="saveInfo">ЗАВЕРШИТЬ</button>
+        </div>
+   
+    </div>
+
+    <!-- Выбор категории -->
+<div id="type" class="background__form">    
+    <div id="coordinate" class="dropdown_content">
+
+        <a id="header_menu">Опишите ошибку</a>
+        
+        <div id="types0">
+            <a href="#" onclick="open_types1()">Тип ошибки <img src="images/Test/type_open.png" class="pometka"></a>
+        </div>
+        <!-- описание ошибки -->
+        <div id="discription0">
+            <a href="#" onclick="open_discription1()">Комментарий... <img src="images/Test/text_open.png" class="pometka"></a>
+        </div>
+        <div id="buttons_menu">
+            <button>Отмена</button>
+            <button id="save">Сохранить</button>
+            
+            <!-- <a href="#">Отмена</a>
+            <a href="#" id="save">Сохранить</a> -->
+        </div>
+    </div>
+</div>
+
+<div id="types1" class="dropdown_content">
+    <a href="#" >Логическая</a>
+    <a href="#">Типографическая</a>
+    <a href="#" >В отрисовке интерфейса</a>
+    <a href="#" >Контентная</a>
+    <a href="#" >Отмена</a>
+</div>
+
+<div id="discription1" class="dropdown_content">
+    <textarea name="" id="commentary" cols="22" rows="10"></textarea>
+    <a href="#">Отмена</a>
+    <a href="#">Сохранить</a>
+</div>
+
+
+<!-- нижние кнопки надо исправить-->
+        <!-- <div class="norm_ramka">
+            
+                <button onclick="otmena_type()"  id="cancel">Отменить ответ</button>
+                <button id="saveInfo" onclick="score_alert()">Закончить</button>
+           
+    </div> -->
+
+
+    <!-- выбор отмены -->
+    <!-- <div id="otmena_type" class="background__form">
+        <div id="errors_otmena" class="dropdown_content">
+            <span>Выберите какой ответ удалить</span>
+            <a href="#" id="otmena_otmena" onclick="otmena_otmena()">Отмена</a>
+        </div>
+
+    </div> -->
+    <!-- пока пусть просто отмена по кнопке -->
+
+    
+    <!-- список того что выбрал уже -->
+
+    <script src="scripts/Test/Test.js"></script>
+    
+<!-- ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// -->
+
+<script type="module">
+
+    // Import the functions you need from the SDKs you need
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/9.17.2/firebase-app.js";
+   import { getDatabase, set, ref, update, onValue } from "https://www.gstatic.com/firebasejs/9.17.2/firebase-database.js";
+   import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/9.17.2/firebase-auth.js";
+   import { getStorage, ref as sRef, uploadBytesResumable, getDownloadURL } from "https://www.gstatic.com/firebasejs/9.17.2/firebase-storage.js";
+   
+   // TODO: Add SDKs for Firebase products that you want to use
+   // https://firebase.google.com/docs/web/setup#available-libraries
+
+   // Your web app's Firebase configuration
+   const firebaseConfig = {
+   apiKey: "AIzaSyAsTpy0hlOYuLNy8v8Pdd-yVUTJOkfgdeQ",
+   authDomain: "oggetto-test.firebaseapp.com",
+   databaseURL: "https://oggetto-test-default-rtdb.firebaseio.com",
+   projectId: "oggetto-test",
+   storageBucket: "oggetto-test.appspot.com",
+   messagingSenderId: "385710351413",
+   appId: "1:385710351413:web:bd67cb22fe155c6f05fd7c"
+   };
+
+   // Initialize Firebase
+   const app = initializeApp(firebaseConfig);
+   const database = getDatabase(app);
+   const auth = getAuth();
+   const user = auth.currentUser;
+
+   var img = document.getElementById('img')
+   let type = document.getElementById('type')
+   let map = document.getElementById('map')
+   let errors_now=document.getElementById('errors_now')
+   let discription1=document.getElementById('discription1')
+   let types1=document.getElementById('types1')
+   let loadScreen=document.getElementById('loadScreen')
+   let mainArea = document.getElementById('mainArea')
+
+   function pageLoad() {
+
+       const db = getDatabase();
+       var errorsAmount = 0;
+       
+       const imageLoad = ref(db, 'tests/1');
+       onValue(imageLoad, (snapshot) => {
+       const data = snapshot.val();
+       errorsAmount = data.errors.amount;
+       img.src = data.img.imageURL;
+       img.style = "min-width: 50vw; max-width: 70vw; min-height: 60vh; max-height: 80vh;"
+
+       setTimeout(function() {loadScreen.style.display = 'none'
+        }, 2000);
+       });
+
+   
+
+        // setTimeout(function() {
+        //     mainArea.coords = '1,1,' + String(img.width) + ',' + String(img.height)
+        //     alert('main')
+        //      for (let i = 1; i < errorsAmount+1; i++) {
+            
+        //     const areaErrorsLoad1 = ref(db, 'tests/1/errors/' + String(i));
+        //     onValue(areaErrorsLoad1, (snapshot) => 
+        //     {
+        //         const data = snapshot.val()
+        //         let tempArea = document.createElement("area")
+        //         tempArea.className="area"
+        //         tempArea.shape="rect"
+        //         tempArea.coords=data.errorCoords
+        //         tempArea.alt=data.errorType
+        //         map.prepend(tempArea)
+        //         alert(tempArea)
+        //     });
+        // }}, 3000);
+
+
+   
+}
+   
+   
+// function areaLoad(data) {
+//    let tempArea = document.createElement("area")
+//    tempArea.className="area"
+//    tempArea.shape="rect"
+//    tempArea.coords=data.errorCoords
+//    tempArea.alt=data.errorType
+//    map.prepend(tempArea)
+//    alert(tempArea)
+// }
+
+document.addEventListener("DOMContentLoaded", pageLoad);
+
+   //Структура характеристик для одной ошибки с методами обнуления элементов и копирования
+   ///////////////
+   class Data {
+       type = " "; 
+       coords = 0; 
+       commentary = " "; 
+       constructor() { }
+
+       clear() 
+       {
+       this.type = " ";
+       this.coords = 0; 
+       this.commentary = " ";
+       }
+
+       copy(another) 
+       {
+           this.type = another.type;
+           this.coords = another.coords;
+           this.commentary = another.commentary;
+       }
+   }
+
+   let dataArray = []                //Массив структур
+   let tempErrorData = new Data()       //Временный экземпляр класса
+   let errorsCount = 0         //Переменная для подсчета количества внесенных ошибок
+
+   let errorsArray = []  
+   //////////////
+
+
+//Занесение координат
+map.addEventListener('click', (event) => {
+   let target=event.target
+   tempErrorData.coords = target.coords
+})
+
+
+//Добавление ошибки и отмена
+type.addEventListener('click', (event)=>{
+let target=event.target
+//Удаление информации
+if(target.innerText=="Отмена"){
+tempErrorData.clear()
+}
+//Добавление новой ошибки в массив
+if(target.innerText=="Сохранить"){
+   //Добавление новой ошибки в массив
+   dataArray[dataArray.length] = new Data
+   dataArray[dataArray.length-1].copy(tempErrorData)
+   errorsArray[dataArray.length-1] = 0
+   tempErrorData.clear()
+   }
+})
+///////////////////////////
+
+
+//Занесение типа ошибки
+types1.addEventListener('click', (event)=>{
+let target=event.target
+if((target.innerText!="Отмена")){
+   tempErrorData.type = target.innerText
+}
+})
+///////////////////////
+
+
+//Занесения комментария ошибки
+discription1.addEventListener('click',(event)=>{
+let target=event.target
+if(target.innerHTML=="Сохранить"){
+   tempErrorData.commentary = document.getElementById("commentary").value
+}
+})
+/////////////////////////////
+
+
+//Удаление ошибки из списка
+errors_now.addEventListener('click',(event)=>{
+   let a_otmena=event.target
+   let tempId = a_otmena.id
+   tempId = tempId.replace("error", "")
+   errorsArray[Number(tempId)] = 1
+})
+////////////////////////////
+
+
+  
+   // document.addEventListener("DOMContentLoaded", function(){
+   //     const db = getDatabase();
+   //     const starCountRef1 = ref(db, 'tests/1/errors/1');
+   //     const starCountRef12 = ref(db, 'tests/1/errors/2');
+
+   //     onValue(starCountRef1, (snapshot) => {
+   //     const data = snapshot.val();
+   //     alert(data.errorCoords)
+   //     }
+   // )
+
+   // saveInfo.addEventListener('click', (e) => {
+   //     const db = getDatabase();
+   //     const starCountRef = ref(db, 'tests/1/errors/1');
+   //     onValue(starCountRef, (snapshot) => {
+   //     const data = snapshot.val();
+   //     alert(data.errorCoords)
+   // });
+
+
+   //////////Добавление картинки
+   // var files = []
+   // var reader = new FileReader()
+   // var myimg = document.getElementById('img')
+   // var selection = document.getElementById('selectPic')
+   // var pro = document.getElementById('pro')
+   // var input = document.getElementById('inputFile')
+   // input.addEventListener('change', (e) => {
+   //     files = e.target.files
+   //     // var extention = 'jpg'
+   //     // var name = 'kit'
+   //     reader.readAsDataURL(files[0])
+   // });
+   // async function uploadProcess() {
+   //     var imgToUpload = files[0]
+   //     var imgName = imgToUpload.name
+   //     const metaData = {
+   //         contentType: imgToUpload.type
+   //     }
+   //     const storage = getStorage();
+   //     const storageRef = sRef(storage, "Test 1")
+   //     const uploadTask = uploadBytesResumable(storageRef, imgToUpload, metaData)
+   //     uploadTask.on('state-changed', (snapshot) =>{
+   //         var progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+   //         pro.innerHTML = "Upload" + progress +"%";
+   //     },
+   //     (error) => {
+   //         alert("error");
+   //     },
+   //     () => {
+   //         getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
+   //             myimg.src = downloadURL;
+   //             const database = getDatabase();
+   //             set(ref(database, 'tests/1' + '/img'), {
+   //                 imageURL: downloadURL
+   //                 })
+
+   //         });
+   //     }
+   //     );
+   // }
+   // selection.onclick = uploadProcess;
+   // //////////////////////
+
+
+
+   let saveInfo=document.getElementById('saveInfo')
+   saveInfo.addEventListener('click', (e) => {
+   let j = 0
+   let errorsAmount = 0;
+   let total = 0;
+   const amountLoad = ref(database, 'tests/1/errors');
+       onValue(amountLoad, (snapshot) => {
+       const data = snapshot.val();
+       errorsAmount = data.amount;
+    })
+
+       for (let i = 0; i < dataArray.length; i++) {
+           if (errorsArray[i] == 0)
+           {
+
+            let flag = 0
+            let state = false
+            for (let k = 1; (k < errorsAmount+1)&&(flag==0); k++)
+            {
+                const areaErrorsLoad = ref(database, 'tests/1/errors/' + String(k));
+
+                onValue(areaErrorsLoad, (snapshot) => 
+                {
+                    const data = snapshot.val()
+                    if(String(data.errorCoords) == String(dataArray[i].coords))
+                    {
+                        flag = 1
+                        if(data.errorType == dataArray[i].type) state = true
+                        else state = false
+                        total += Number(state)
+                    }
+                });
+            }
+
+               const auth = getAuth();
+               const user = auth.currentUser;
+               j++
+               if (user !== null) {
+   set(ref(database, 'users/' + user.uid + '/tests/1' + '/errors/' + j), {
+       errorId: j,
+       errorType: dataArray[i].type,
+       errorCommentary: dataArray[i].commentary,
+       errorCoords: dataArray[i].coords,
+       state: state
+       })
+   }
+   }
+   }
+
+   let newTotal = (total/errorsAmount)*100
+//    set(ref(database, 'users/' + user.uid + '/tests/1' + '/errors'), {
+//        totalScore: newTotal
+//        })
+
+       window.location.href = "TestList.html";
+   });
+</script>
+</body>
+</html>

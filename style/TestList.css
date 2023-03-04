@@ -1,0 +1,408 @@
+/* ----Обнуление---- */
+*,
+*::before,
+*::after {
+    padding: 0;
+    margin: 0;
+    border: 0;
+    box-sizing: border-box;
+}
+
+a {
+    text-decoration: none;
+}
+
+u1,
+o1,
+li {
+    list-style: none;
+}
+
+img {
+    vertical-align: top;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-weight: inherit;
+    font-size: inherit;
+}
+
+html,body {
+    line-height: 1;
+    color: black;
+    font-family: 'Montserrat';
+    overflow-x: hidden;
+}
+
+.page {
+    overflow: hidden;
+}
+
+.container-vertical {
+  margin: 0 6.2vw;
+  display: flex;
+  flex-direction: row;
+  height: 100%;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.container {
+  margin: 0 6.2vw;
+}
+/* ----Обнуление---- */
+.center {
+  display: flex;
+  align-items: center;
+}
+
+.container {
+  display: flex;
+  flex-direction: row;
+  height: 100%;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+/* ----Orientation change---- */
+.hide-page {
+  background: white;
+  width: 100%;
+  height: 105%;
+  z-index: 1;
+  position: fixed;
+  top: 0;
+  left: 0;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.hide-image {
+  width: 50vw;
+  margin-bottom: 1.1vw;
+}
+
+.hide-text {
+  color: black;
+  font-weight: 400;
+  font-size: 6vw;
+}
+/* ----Orientation change---- */
+.header__logo {
+  width: 8.5vw;
+  height: 2.8vw;
+}
+
+.header__logoA {
+  display: flex;
+  align-items: center;
+  margin-left: 0.2vw;
+}
+
+.header__container {
+  width: 100vw;
+}
+
+#logo3 {
+  margin-top: 5vh;
+  margin-left: 3.5vw;
+}
+
+/* ----Обнуление для горизонтального скролла---- */
+.horizontal {
+  overflow-y: hidden; /* Скрываем scrollbars */
+  overflow-x: hidden;
+  color: white;
+  background-color: black;
+}
+
+.animation-wrap {
+  display: inline-flex;
+}
+
+.item {
+  width: 100vw;
+  height: 100vh;
+  position: relative;
+}
+
+.blank {
+  width: 100vw;
+  height: 110vh;
+  padding-bottom: 5vh;
+}
+/* ----Обнуление для горизонтального скролла---- */
+
+/* ----3 страница---- */
+
+.third__left {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 25.3vw;
+  }
+  
+  .third__left-logo {
+    display: flex;
+    flex-direction: column;
+    height: 10.27vw;
+    border-left: 1px solid #000000;
+    border-right: 1px solid #000000;
+    padding: 1.5vw 2vw;
+  }
+  
+  .third__left-tittle {
+    padding-top: 1.16vw;
+    padding-left: 1vw;
+    font-weight: 600;
+    font-size: 2vw;
+    line-height: 2.4vw;
+    color: #000000;
+  }
+  
+  .clips__container {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+  }
+  
+  .clip-one {
+    width: 2.777vw;
+    height: 2.777vw;
+  }
+  
+  .clip-two {
+    width: 2.777vw;
+    height: 2.777vw;
+  }
+  
+  .third__grey-list {
+    width: 24.3vw;
+    height: 36.2vw;
+  }
+  
+  .greyList {
+    position: relative;
+  }
+  
+  .text-on-grey-list {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    display: flex;
+    flex-direction: column;
+    padding: 2.53vw 0.5vw;
+  }
+  
+  .text-on-grey-list-first {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    text-align: right;
+  }
+  
+  .text-on-grey-list-first-p {
+    font-weight: 400;
+    font-size: 1.2vw;
+    color: rgba(0, 0, 0, 0.8);
+    line-height: 1.5vw;
+  }
+  
+  .dot-grey-list {
+    width: 0.55vw;
+    height: 0.55vw;
+    margin-right: 0.2vw;
+  }
+  
+  .text-on-grey-list-h1 {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  
+  .text-on-grey-list-h1__tittle {
+    display: flex;
+    justify-content: center;
+    padding-top: 1vw;
+    font-weight: 600;
+    font-size: 1.3vw;
+    line-height: 1.6vw;
+    color: #000000;
+  }
+  
+  .text-on-grey-list__list-h1 {
+    font-weight: 700;
+    font-size: 1.3vw;
+    line-height: 1.6vw;
+    color: #BFB9F7;
+    text-shadow: 0.1vw 0.1vw 0.1vw black,
+    0.1vw 0.1vw 0.1vw black;
+  }
+  
+  .list__list-h1-first {
+    padding-left: 0.5vw;
+    padding-bottom: 1vw;
+  }
+  
+  .list__list-h1-second {
+    display: flex;
+    justify-content: flex-end;
+    padding-right: 0.6vw;
+    padding-bottom: 1vw;
+  }
+  
+  .text-on-grey-list-p2 {
+    padding-top: 1vw;
+  }
+  
+  .text-on-grey-list-second {
+    display: flex;
+    align-items: center;
+  }
+  
+  .text-on-grey-list-first-p2 {
+    font-weight: 400;
+    font-size: 1.1vw;
+    line-height: 1.3vw;
+    color: rgba(0, 0, 0, 0.8);
+  }
+  
+  .list__list-h1-third {
+    padding-left: 3vw;
+  }
+  
+  .text-on-grey-list__list {
+    padding-top: 1.5vw;
+  }
+  
+  .third__right {
+    position: relative;
+  }
+  
+  .hand {
+    position: absolute;
+    width: 30.55vw;
+    height: 47vw;
+    top: 1.5vw;
+    left: 0.7vw;
+  }
+  
+  .rectangles {
+    width: 48.89vw;
+    height: 50vw;
+  }
+  
+  .hand-list__text {
+    position: absolute;
+    top: 5.3vw;
+    left: 1.85vw;
+  }
+  
+  .hand-list__text-h1 {
+    font-weight: 600;
+    font-size: 1.1vw;
+    line-height: 1.33vw;
+    color: #000000;
+    transform: rotate(-24.18deg);
+  }
+  
+  .hand-list__text-list {
+    display: flex;
+    padding-bottom: 1.5vw;
+  }
+  
+  .hand-list__text-p {
+    display: flex;
+    flex-direction: column;
+    padding-left: 3.3vw;
+    padding-top: 1.5vw;
+    font-weight: 400;
+    font-size: 1.1vw;
+    line-height: 1.33vw;
+    color: #000000;
+    transform: rotate(-24.24deg);
+  }
+  
+  .hand-list__dot {
+    color: #FBDA00;
+    padding-right: 0.3vw;
+  }
+  
+  
+  /* ----3 страница---- */
+  /* ----4 страница---- */
+  .fourpage__tittle {
+    margin-left: 6vw;
+    font-weight: 500;
+    line-height: 2.5vw;
+    font-size: 2vw;
+    margin-bottom: 7.9vw;
+  }
+  
+  .fourpage__main {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+  }
+  
+  .tests__container {
+    display: flex;
+    width: 100% / 3;
+  }
+  
+  .fourpage__item-text {
+    margin-bottom: 2.1vw;
+    font-weight: 500;
+    font-size: 2vw;
+    color: black;
+  }
+  
+  .fourpage__item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    margin: 0 0.5vw;
+  }
+  
+  .item__borders {
+    border-right: 0.38vw solid black;
+    border-left: 0.38vw solid black;
+  }
+  
+  .fourpage__picture {
+    width: 23.8vw;
+    height: 18.9vw;
+    margin: 0 0.5vw 2.16vw 0.5vw;
+  }
+  
+  .fourpage__button {
+    margin-right: 2.3vw;
+    margin-left: auto;
+    background-color: #FBDA00;
+    color: black;
+    font-weight: 500;
+    font-size: 1.33vw;
+    padding: 0.44vw 2.44vw;
+    border-radius: 3.1vw;
+    cursor: pointer;
+    box-shadow: 0 0.22vw 0.22vw rgba(0, 0, 0, 0.25);
+  }
+  /* ----4 страница---- */
+
+
+  .disabled {
+    pointer-events: none; /* делаем элемент неактивным для взаимодействия */
+    cursor: default; /*  курсор в виде стрелки */
+    color: #B4B4B4;/* цвет текста серый */
+    background-color: #F9EB8F;
+    }
